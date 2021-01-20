@@ -75,6 +75,7 @@ export default {
                     color: #fff;
                     border: none;
                     transition: all .5s;
+                    padding-top: 1px;
                 }
                 .active{
                     background-color: #ffa500;

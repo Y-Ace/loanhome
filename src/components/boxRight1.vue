@@ -70,8 +70,8 @@ export default {
 </script>
 <style lang="scss">
 @keyframes bgchange{
-	from{background-size: 100% 100%;}
-	to{background-size: 105% 105%;}
+	from{background-size: 107% 105%; background-position: -10px -2px;}
+	to{background-size: 110% 108%;}
 }
 .rbox{
 	position: relative;
@@ -90,9 +90,10 @@ export default {
         height:100%;
         background: #e8e8e8;
         .rtop{
-                margin-top:10px;
+                padding-top:10px;
                 display: flex;
                 flex-wrap:wrap;
+                padding-left:1px;
                 .rtb:hover{
                     h4{
                         color:#cc7f11;
@@ -107,23 +108,25 @@ export default {
                         width: 300px;
                         height:190px;
                         background: url(../assets/img/攻略2.png) no-repeat;
-                        background-size: 100% 100%;
+                        background-size: 107% 105%;
+                        background-position: -10px -2px;
                         color:#fff;
                         h4{
                             font-size:20px;
                             margin:-4px 0 14px 40px;
                         }
                         h6{
-                            font-size:15px;
+                            font-size:14px;
                             margin-left:40px;
                             font-weight:500;
-                            margin-bottom:56px;
+                            margin-bottom:55px;
                         }
                         span{
                             margin-left:41px;
                             a{
                                 color:#ccc;
                                 font-size:13px;
+                            margin-right:3px;
                             }
                         }
                 }
@@ -164,11 +167,13 @@ export default {
                     color:#fff;
                     font-weight:600;
                     font-size:15px;
+                    margin-left: 2px;
                 }
                 :last-child{
                     color: wheat;
                     font-size: 13px;
-                    margin-top: 8px;
+                    margin-top: 8px;   
+                    margin-left: 3px;
                 }
             }
           }

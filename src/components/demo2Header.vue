@@ -7,7 +7,13 @@
                    <img v-show="isActiveTwo"  src="../assets/img/flogo.png" alt="">
                </div>
                <div class="address">
-                  <img src="../assets/img/定位.png" alt=""> <span>深圳</span> <img src="../assets/img/down.png" alt="">
+                  <img src="../assets/img/定位.png" alt="">
+                <el-cascader
+                        :options="cityOptions" :show-all-levels="false"
+                        :value="address"
+                        :props="{ expandTrigger: 'hover' }"
+                    >
+                    </el-cascader>
                </div>
               <nav class="nav">
 				<ul>
@@ -48,12 +54,12 @@
        </div>
        <div class="header-footer" @mouseleave="liLeave">
            <ul>
-               <li v-for="item in navList" :key="item.name" @mouseover="liHover" >
+               <li :class="{liActive:index==isActive}" v-for="(item,index) in navList" :key="item.name" @mouseover="liHover(index)" >
                 <div>{{item.name}} <img src="../assets/img/right1.png" alt=""></div>
                 <span v-for="items in item.spanList" :key="items.spname">{{items.spname}}</span>
                </li>
            </ul>
-         <nav-bottom v-show="isShowNavBottom"></nav-bottom>
+         <nav-bottom :indexNum="isActive" v-show="isShowNavBottom" ></nav-bottom>
        </div>
     </div>
 </template>
@@ -62,6 +68,7 @@
 import {menuList, navList, topNavList} from '../config/header-config'
 import NavBottom from './navbottom.vue'
 import GunDong from './gundongNum.vue'
+import cityOptions from "../config//citydata.js";
 export default {
     data() {
         return {
@@ -73,15 +80,21 @@ export default {
             isShowNavBottom: false,
             isActiveOne:true,
             isActiveTwo:false,
-            scroll: ''
+            scroll: '',
+            isActive:-1,
+            cityOptions,
+            address:'深圳'
         }
     },
     methods: {
-        liHover() {
+        liHover(i) {
           this.isShowNavBottom = true
+          this.isActive = i
+          console.log(this.isActive)
         },
         liLeave() {
             this.isShowNavBottom = false
+            this.isActive =-1
         },
         menu(){
             this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -106,18 +119,21 @@ export default {
 
 <style lang="scss">
     .h8{
-        height: 810px;
+        height: 815px;
+        transition: all .5s ease;
     }
     .h6{
-        height:606px;
+        height:607px;
+        transition: all .4s ease;
     }
     .header{
         width:100%;
-        
         position: relative;
+        overflow:hidden;
         .active{
             @extend .header-top;
             background-color:rgba(255,255,255,1) !important;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
             li{
                a{
                  color:#000 !important;
@@ -143,6 +159,7 @@ export default {
                     margin-left: 32px;
                     margin-top: 14px;
                 }
+                
                 .address{
                     margin-top:35px;
                     margin-left: 18px;
@@ -151,7 +168,46 @@ export default {
                     line-height:25px;
                     border-radius:20px;
                     font-size:11px;
-                    background-color:rgba(255,255,255,0.3);
+                    position:relative;
+                    .el-input--suffix{
+                    width: 80px;
+                    height:25px;
+                    line-height:25px;
+                    border-radius:20px;
+                    font-size:11px;
+                    overflow:hidden;
+                    position:absolute;
+                    top:-17px;
+                    left:-23px;
+                    input::-webkit-input-placeholder{
+                           color: #000;
+                       }
+                    .el-input__inner{
+                        font-size:12px;
+                        padding-left:22px;
+                        padding-right:0;
+                        height:25px;
+                        line-height:25px;
+                        color:#000 ;
+                        background-color:rgba(255,255,255,0.3);
+                        border:none;
+                        
+                        
+                    }
+                    span{
+                            margin-left:20px;
+                            i{
+                                color:#000;
+                            }
+                            .el-input__icon{
+                                line-height:30px;
+                            }
+                                .el-icon-arrow-down:before{
+                                    margin-left:15px;
+                                    margin-top:-5px;
+                                }
+                        }
+                }
                     span{
                         margin-top:-2px;
                     }
@@ -238,6 +294,7 @@ export default {
             height:100%;
             top: 0;
             left:0;
+            z-index:6;
             .el-carousel {
             width:100%;
             height:100%;
@@ -259,14 +316,16 @@ export default {
             }
             .gundong{
                 position: absolute;
-                top:345px;
-                left:729px;
+                top:355px;
+                left:49.5%;
+                transform: translate(-50%,-50%);
                 font-size:15px;
                 z-index:3;
                 color:#cccccc;
                 span{
                     color:#ffa500;
                     font-size:20px;
+                    font-weight: 600;
                 }
             }
             .el-carousel__arrow{
@@ -289,20 +348,39 @@ export default {
   .header-footer{
       position:absolute;
       width:100%;
-      height:260px;
-      top:555px;
-      z-index:5;
+      top:558px;
+      z-index:6;
       ul{
         margin:0 auto;
         color: #fff;
         width:1200px;
         display:flex;
         height:47px;
+        .liActive{
+           float:left;
+            border-left:2px solid #ff9f15;
+            padding-left:10px;
+            padding-right:25px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color:#ff9f15;
+            div{
+                font-size:16px;
+                margin-bottom:12px;  
+                margin-top:2px;
+                img{
+                    margin-left:8px;
+                }
+            }
+            span{
+                font-size:10px;
+                margin-right:.6rem;
+            }
+        }
         li{
             float:left;
             border-left:2px solid #fff;
             padding-left:10px;
-            padding-right:25px;
+            padding-right:26px;
             div{
                 font-size:16px;
                 margin-bottom:12px;  
@@ -317,7 +395,7 @@ export default {
             }
         }
         li:nth-child(1){
-            margin-left:220px;
+            margin-left:218px;
             margin-right:47px;
         }
         li:nth-child(2){

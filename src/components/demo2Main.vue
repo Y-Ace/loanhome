@@ -6,29 +6,29 @@
                     <img src="../assets/img/pg.png" alt="">
                 </div>
                 <div class="bp">
-                    <el-form :inline="true" :model="formInline" class="demo-form-inline">
-                        <el-form-item>
-                            <el-input v-model="formInline.user" placeholder="您的姓氏" class="xs"></el-input>
+                    <el-form :inline="true" :model="ruleForm" ref="formRef" :rules="rules" class="demo-form-inline">
+                        <el-form-item prop="user">
+                            <el-input v-model="ruleForm.user" placeholder="您的姓氏" class="xs"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-radio-group v-model="formInline.resource">
+                            <el-radio-group v-model="ruleForm.resource">
                             <el-radio label="先生"></el-radio>
                             <el-radio label="女士"></el-radio>
                             </el-radio-group>
                         </el-form-item>
-                        <el-form-item>
-                            <el-input v-model="formInline.user" placeholder="贷款金额（单位：万元）" class="je"></el-input>
+                        <el-form-item prop="num">
+                            <el-input v-model="ruleForm.num" placeholder="贷款金额（单位：万元）" class="je"></el-input>
                         </el-form-item>
-                        <el-form-item>
-                            <el-input v-model="formInline.user" placeholder="输入手机号码" class="sj"></el-input>
+                        <el-form-item prop="tel">
+                            <el-input v-model="ruleForm.tel" placeholder="输入手机号" class="sj"></el-input>
                         </el-form-item>
-                        <el-form-item>
-                            <el-input v-model="formInline.user" placeholder="输入验证码" class="yzm"></el-input>
+                        <el-form-item prop="yzm">
+                            <el-input v-model="ruleForm.yzm" placeholder="输入验证码" class="yzm"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <img src="../assets/img/验证码.png" alt="">
                         </el-form-item>
-                            <button type="primary" @click="onSubmit">申请贷款</button>
+                            <input class="button" @click="submitForm()" type="button" value="申请贷款"></input>
                     </el-form>
                 </div>
             </div>
@@ -48,17 +48,17 @@
            <box-right-3></box-right-3>
         </div>
 
-        <div class="main-box mb4">
+        <div class="main-box">
             <left-content :box-config="boxFourConfig" class="leftContent4"></left-content>
             <box-right-4></box-right-4>
         </div>
 
-        <div class="main-box mb5">
+        <div class="main-box">
             <left-content :box-config="boxFiveConfig" class="leftContent5"></left-content>
              <box-right-5></box-right-5>
         </div>
         
-         <div class="main-box mb6">
+         <div class="main-box">
             <left-content :box-config="boxSixConfig" class="leftContent6"></left-content>
              <box-right-6></box-right-6>
         </div>
@@ -72,6 +72,8 @@
                 <img src="../assets/img/合作伙伴4.png" alt="">
                 <img src="../assets/img/合作伙伴1.png" alt="">
                 <img src="../assets/img/合作伙伴2.png" alt="">
+                <img src="../assets/img/合作伙伴3.png" alt="">
+                <img src="../assets/img/合作伙伴4.png" alt="">
             </vue-seamless-scroll>
                  
             </div>
@@ -92,11 +94,29 @@ import vueSeamlessScroll  from 'vue-seamless-scroll'
 export default {
     data() {
         return {
-           formInline: {
+           ruleForm: {
               user: '',
                 region: '',
-                resource: ''
+                num: '',
+                tel:'',
+                yzm:''
             },
+            rules: {
+                user: [
+                    { required: true, message: '请输入活动名称', trigger: 'blur' },
+                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ],
+                num: [
+                    { required: true, message: '请填写贷款金额', trigger: 'blur' }
+                ],
+                tel: [
+                    { required: true, message: '请填写手机号码', trigger: 'blur' },
+                    { min: 11, max: 11, message: '请输入真确的手机号码', trigger: 'blur' }
+                ],
+                yzm: [
+                    { required: true, message: '请输入验证码', trigger: 'blur' }
+                ]
+                },
            infoList,
            rtb, 
            rtbOne,
@@ -121,7 +141,18 @@ export default {
       indexNum(data){
           console.log(data)
             this.msg=data
-      }
+      },
+     submitForm() {
+        this.$refs.formRef.validate((valid) => {
+            console.log(valid);
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
     },
     components: {
         LeftContent,
@@ -172,6 +203,7 @@ to{margin-top:0px}
             .header-box {
              width: 100%;
              margin:0 auto;
+             position: relative;
             .bp{
             width: 1200px;
             padding-left: 20px;
@@ -188,19 +220,30 @@ to{margin-top:0px}
                 .el-form-item{
                     .el-form-item__content{
                         .xs{
-                            width:185px;
-                            
+                            width:182px;
+                            input{
+                                padding-left:20px;
+                            }
                         }
                         .je{
                          width: 210px;
+                         input{
+                                padding-left:20px;
+                            }
                         }
                         .sj{
                             margin-left: -4px;
                             width: 210px;
+                            input{
+                                padding-left:20px;
+                            }
                         }
                         .yzm{
                             width: 105px;
                             margin-left: 17px;
+                            input{
+                                padding-left:20px;
+                            }
                         }
                     }
                 }
@@ -208,15 +251,17 @@ to{margin-top:0px}
                     margin-left:6px;
                     margin-top:6px;
                 }
-                button{
+                .button{
                     width:200px;
-                    height:105px;
+                    height:106px;
                     float: right;
                     margin-top: -37px;
                     background-color:#ffa500;
                     border:none;
                     color:#fff;
                     font-size:22px;
+                    position: absolute;
+                    right: 0;
                 }
                 .el-form-item{
                     .el-radio-group{
@@ -243,7 +288,8 @@ to{margin-top:0px}
                 float:left;
                 padding-left:234px;
                 margin-top:-2px;
-                
+                position: absolute;
+                z-index:5;
             }
             .tp:hover{
                 animation:mymove 1s 1;
@@ -265,20 +311,21 @@ to{margin-top:0px}
             height:100%;
              background: url(../assets/img/左侧选项卡1.png) no-repeat;
              background-size: 100% 100%;
-            .left-connter{
-                display: flex;
-                // justify-content: space-around;
-                flex-wrap:wrap;
-                span{
-                    display: inline-block;
-                    width: 90px;
-                    height:25px;
-                    line-height:25px;
-                    text-align:center;
-                    // border: 1px solid #000;
-                    // margin-top: 10px;
-                }
-            }
+             margin-left:-2px;
+            // .left-connter{
+            //     display: flex;
+            //     // justify-content: space-around;
+            //     flex-wrap:wrap;
+            //     span{
+            //         display: inline-block;
+            //         width: 90px;
+            //         height:25px;
+            //         line-height:25px;
+            //         text-align:center;
+            //         // border: 1px solid #000;
+            //         // margin-top: 10px;
+            //     }
+            // }
         }
 
         .leftContent1{
@@ -306,7 +353,7 @@ to{margin-top:0px}
         width: 1200px;
         margin: 0px auto;
         font-size:20px;
-        padding-bottom:42px;
+        padding-bottom:57px;
         h3{
             font-size:24px;
             font-weight:500;
@@ -317,10 +364,10 @@ to{margin-top:0px}
             margin-top:30px;
             margin-left:3px;
             overflow: hidden;
-            height:70px;
+            height:55px;
             img{
-                width:300px;
-                margin-right:55px;
+                width:250px;
+                margin-right:45px;
             }
         }
     }

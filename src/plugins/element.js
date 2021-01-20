@@ -7,7 +7,8 @@ import {
     Form,
     FormItem,
     Radio,
-    RadioGroup
+    RadioGroup,
+    Cascader
 } from 'element-ui'
 
 Vue.use(Button)
@@ -18,3 +19,4 @@ Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Radio)
 Vue.use(RadioGroup)
+Vue.use(Cascader)

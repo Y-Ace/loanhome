@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-bottom">
+    <div class="nav-bottom" :class="indexNum==-1?'':'bgchange'">
         <div class="nav-bottom-box">
             <div class="nav-bottom-box-left">
                 <div class="nav-bottom-box-left-top">
@@ -14,7 +14,19 @@
                 </div>
             </div>
             <div class="nav-bottom-box-right">
-                <div class="nav-bottom-box-right-nav" v-for="(item, index) in bottomList" :key="index">
+                <div class="nav-bottom-box-right-nav" v-show="indexNum==0" v-for="(item, index) in bottomList" :key="index">
+                    <dt>{{item.dtname}}</dt>
+                    <dd v-for="(items, index) in item.ddname" :key="index">{{items}}</dd>
+                </div>
+                <div class="nav-bottom-box-right-nav" v-show="indexNum==1" v-for="(item, index) in bottomListOne" :key="index">
+                    <dt>{{item.dtname}}</dt>
+                    <dd v-for="(items, index) in item.ddname" :key="index">{{items}}</dd>
+                </div>
+                <div class="nav-bottom-box-right-nav" v-show="indexNum==2" v-for="(item, index) in bottomListTwo" :key="index">
+                    <dt>{{item.dtname}}</dt>
+                    <dd v-for="(items, index) in item.ddname" :key="index">{{items}}</dd>
+                </div>
+                <div class="nav-bottom-box-right-nav" v-show="indexNum==3" v-for="(item, index) in bottomList" :key="index">
                     <dt>{{item.dtname}}</dt>
                     <dd v-for="(items, index) in item.ddname" :key="index">{{items}}</dd>
                 </div>
@@ -24,22 +36,27 @@
 </template>
 
 <script>
-import {bottomList} from '../config/header-config'
+import {bottomList, bottomListOne, bottomListTwo} from '../config/header-config'
 export default {
     name:'NavBottom',
     data() {
         return {
-            bottomList
+            bottomList,
+            bottomListOne,
+            bottomListTwo
         }
     },
+    props:['indexNum']
 }
 </script>
 
 <style lang="scss" scoped>
+
     .nav-bottom {
             width: 100%;
             height: 210px;
             background-color: rgba(0, 0, 0, 0.5);
+            transition: all 1s linear;
             float: left;
             position: relative;
             overflow: hidden;
@@ -85,6 +102,7 @@ export default {
                         transition: all 1s;
                         width:240px;
                         height:210px;
+                        transition: all 1s linear;
                         dt{
                             font-size:15px;
                             color:#fff;
@@ -97,13 +115,16 @@ export default {
                         }
                     }
                     &-nav:hover{
+                        transition: all 1s linear;
                         background: url(../assets/img/bannercar.png) no-repeat;
                         background-size: 100% 100%;
                         dt{
                             color:#000;
+                            transition: all 1s linear;
                         }
                         dd{
                             color:#000;
+                            transition: all 1s linear;
                         }
                     }
                 }

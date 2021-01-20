@@ -85,4 +85,40 @@ const bottomList= [
         ddname:['钱借到，车照开！','额度高达50万。','最快1天放款，经营都可以。']
     }
 ]
-export {menuList, navList, topNavList, bottomList}
+const bottomListOne= [
+    {
+        dtname:'平安银行新一贷',
+        ddname:['零抵押，上限50万！','只来银行一次！','资料齐全最快一天！']
+    },
+    {
+        dtname:'平安银行新一贷',
+        ddname:['免抵押免担保：手续简便，无需提供任何抵押和担保。','期限长：贷款期限最高可达36个月','额度高：贷款额度最高可达60万元。']
+    },
+                    {
+                        dtname:'平安银行车抵贷',
+                        ddname:['钱借到，车照开！','额度高达50万。','最快1天放款，经营都可以。']
+                    },
+    {
+        dtname:'包商银行信用贷',
+        ddname:['钱借到，车照开！','额度高达50万。','最快1天放款，经营都可以。']
+    }
+]
+const bottomListTwo= [
+    {
+        dtname:'平安银行新一贷',
+        ddname:['零抵押，上限50万！','只来银行一次！','资料齐全最快一天！']
+    },
+    {
+        dtname:'平安银行新一贷',
+        ddname:['免抵押免担保：手续简便，无需提供任何抵押和担保。','期限长：贷款期限最高可达36个月','额度高：贷款额度最高可达60万元。']
+    },
+    {
+        dtname:'包商银行信用贷',
+        ddname:['钱借到，车照开！','额度高达50万。','最快1天放款，经营都可以。']
+    },
+                    {
+                        dtname:'平安银行车抵贷',
+                        ddname:['钱借到，车照开！','额度高达50万。','最快1天放款，经营都可以。']
+                    }
+]
+export {menuList, navList, topNavList, bottomList, bottomListOne, bottomListTwo}
