@@ -1,0 +1,88 @@
+const menuList = [
+    {
+        link:'',
+        name:'首页'
+    },
+    {
+        link:'',
+        name:'贷款攻略'
+    },
+    {
+        link:'',
+        name:'找贷款'
+    },
+    {
+        link:'',
+        name:'找顾问'
+    },
+    {
+        link:'',
+        name:'明显任务'
+    }
+]
+const topNavList = [
+    {
+        link:'',
+        name:'信用卡'
+    },
+    {
+        link:'',
+        name:'股票开户'
+    },
+    {
+        link:'',
+        name:'网贷开户'
+    },
+    {
+        link:'',
+        name:'问答'
+    }
+]
+const navList = [
+    {
+        name:'优选贷款产品',
+        spanList:[
+            {spname:'个人类'},
+            {spname:'企业类'}
+        ]
+    },
+    {
+        name:'明星人物',
+        spanList:[
+            {spname:'附件兼职'},
+            {spname:'最新兼职'},
+            {spname:'领取任务'}
+        ]
+    },
+    {
+        name:'数据中心',
+        spanList:[
+            {spname:'实时统计平台运营数据，一目了然'}
+        ]
+    },
+    {
+        name:'信息安全',
+        spanList:[
+            {spname:'3重安全防护，360°保障信息安全'}
+        ]
+    }
+]
+const bottomList= [
+    {
+        dtname:'平安银行新一贷',
+        ddname:['零抵押，上限50万！','只来银行一次！','资料齐全最快一天！']
+    },
+    {
+        dtname:'平安银行车抵贷',
+        ddname:['钱借到，车照开！','额度高达50万。','最快1天放款，经营都可以。']
+    },
+    {
+        dtname:'平安银行新一贷',
+        ddname:['免抵押免担保：手续简便，无需提供任何抵押和担保。','期限长：贷款期限最高可达36个月','额度高：贷款额度最高可达60万元。']
+    },
+    {
+        dtname:'包商银行信用贷',
+        ddname:['钱借到，车照开！','额度高达50万。','最快1天放款，经营都可以。']
+    }
+]
+export {menuList, navList, topNavList, bottomList}
